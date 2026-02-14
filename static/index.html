@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BuildingMonitor Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .equipment-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .equipment-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #ccc;
+        }
+        .equipment-item.healthy {
+            border-left-color: #4CAF50;
+        }
+        .equipment-item.warning {
+            border-left-color: #FF9800;
+        }
+        .equipment-item.critical {
+            border-left-color: #f44336;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .status.healthy {
+            background: #4CAF50;
+            color: white;
+        }
+        .status.warning {
+            background: #FF9800;
+            color: white;
+        }
+        .status.critical {
+            background: #f44336;
+            color: white;
+        }
+        button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BuildingMonitor Dashboard</h1>
+        
+        <div class="card">
+            <h2>Buildings</h2>
+            <button onclick="loadBuildings()">Refresh Buildings</button>
+            <div id="buildings"></div>
+        </div>
+
+        <div class="card">
+            <h2>Equipment Status</h2>
+            <button onclick="loadEquipment()">Refresh Equipment</button>
+            <div id="equipment" class="equipment-list"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+
+        async function loadBuildings() {
+            const resp = await fetch(`${API_URL}/buildings`);
+            const buildings = await resp.json();
+            
+            let html = '<ul>';
+            buildings.forEach(b => {
+                html += `<li><strong>${b.name}</strong> - ${b.location || 'N/A'}</li>`;
+            });
+            html += '</ul>';
+            
+            document.getElementById('buildings').innerHTML = html;
+        }
+
+        async function loadEquipment() {
+            const resp = await fetch(`${API_URL}/equipment`);
+            const equipment = await resp.json();
+            
+            let html = '';
+            equipment.forEach(e => {
+                html += `
+                    <div class="equipment-item ${e.status}">
+                        <h3>${e.name}</h3>
+                        <p><strong>Type:</strong> ${e.type}</p>
+                        <p><strong>Model:</strong> ${e.model || 'N/A'}</p>
+                        <p><strong>Status:</strong> <span class="status ${e.status}">${e.status}</span></p>
+                        <p><strong>Building ID:</strong> ${e.building_id}</p>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('equipment').innerHTML = html;
+        }
+
+        // load on page load
+        loadBuildings();
+        loadEquipment();
+    </script>
+</body>
+</html>
