@@ -1,3 +1,4 @@
+cat > static/index.html << 'EOF'
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +95,7 @@
     </div>
 
     <script>
-        const API_URL = 'http://localhost:5000/api';
+        const API_URL = 'http://34.228.27.91:5000/api';
 
         async function loadBuildings() {
             const resp = await fetch(`${API_URL}/buildings`);
@@ -129,9 +130,9 @@
             document.getElementById('equipment').innerHTML = html;
         }
 
-        // load on page load
         loadBuildings();
         loadEquipment();
     </script>
 </body>
 </html>
+EOF
