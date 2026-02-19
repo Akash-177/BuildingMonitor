@@ -9,7 +9,7 @@ It’s intentionally concept similar to product full product.
 - Register buildings and equipment (HVAC, chillers, elevators, lighting)
 - Accept sensor readings (temperature, vibration, runtime hours)
 - Flag anomalies using a simple stats baseline
-- Auto-updates equipment status: healthy → warning → critical
+- Auto-updates equipment status: healthy or warning or critical
 - Basic PyTest coverage for core endpoints
 
 ## Stack
