@@ -25,9 +25,10 @@ It’s intentionally concept similar to product full product.
 
 ## Screenshots
 
+## Screenshots
+
 ### Dashboard View
-![Dashboard](screenshots/dashboard.png)
-
+![Dashboard](screenshots/Dashboard.png)
+git add README.md
 ### Equipment Status Monitoring
-![Equipment Status](screenshots/equipment-status.png)
-
+![Equipment Status](screenshots/Equipment_status.png)
