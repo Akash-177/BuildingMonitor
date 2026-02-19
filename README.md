@@ -1,12 +1,12 @@
 # BuildingMonitor
 
-Small Flask + MySQL project I built while revising backend basics and trying to get closer to the kind of “equipment + telemetry” problems you see in building automation (similar space to Acuity / Atrius).
+Small Flask and MySQL project I built while revising backend basics and trying to get closer to the kind of “equipment + telemetry” problems you see in building automation (similar space to Acuity / Atrius).
 
-It’s intentionally a focused proof-of-concept, not a full product.
+It’s intentionally concept similar to product full product.
 
 ## What it does
 
-- Register buildings + equipment (HVAC, chillers, elevators, lighting)
+- Register buildings and equipment (HVAC, chillers, elevators, lighting)
 - Accept sensor readings (temperature, vibration, runtime hours)
 - Flag anomalies using a simple stats baseline
 - Auto-updates equipment status: healthy → warning → critical
@@ -14,12 +14,20 @@ It’s intentionally a focused proof-of-concept, not a full product.
 
 ## Stack
 
-- Python + Flask
-- MySQL + SQLAlchemy
+- Python and Flask
+- MySQL and SQLAlchemy
 - PyTest
-- requests (for seeding + sensor simulator)
+- requests (for seeding and sensor simulator)
 
 ## Run locally
 
 1) Create `.env` in the project root:
+
+## Screenshots
+
+### Dashboard View
+![Dashboard](screenshots/dashboard.png)
+
+### Equipment Status Monitoring
+![Equipment Status](screenshots/equipment-status.png)
 
